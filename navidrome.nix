@@ -8,13 +8,15 @@
 {
   services.navidrome = {
     enable = true;
-    settings.MusicFolder = "/mnt/audio/music";
+ settings = {
+    Address = "0.0.0.0";
+    DataFolder = "/mnt/audio/data";
+    MusicFolder = "/mnt/audio/music";
+  };
 
     plugins = with pkgs.navidromePlugins; [
-      audiomuseai
       apple-music
       listenbrainz-daily-playlist
-      lyrics-plugin
     ];
 
     # The lyrics plugin bundle is named lyrics-plugin.ndp.
