@@ -19,7 +19,6 @@
       dns = {
         domainNeeded = true;
         expandHosts = true;
-        interface = "br-lan";
         listeningMode = "BIND";
         upstreams = [ "127.0.0.1#5053" ];
       };
