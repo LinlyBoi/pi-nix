@@ -16,11 +16,18 @@
       }
     ];
     settings = {
+      files.pid = "/run/pihole/pihole-flt.pid";
       dns = {
         domainNeeded = true;
         expandHosts = true;
-        listeningMode = "BIND";
-        upstreams = [ "127.0.0.1#5053" ];
+        listeningMode = "ALL";
+        upstreams = [ "1.1.1.1" "1.0.0.1" ];
+        hosts = [
+          "100.64.26.26 music.pi"
+          "100.64.26.26 nextcloud.pi"
+          "100.64.26.26 hledger.pi"
+          "100.64.26.26 pi.hole"
+        ];
       };
       dhcp = {
         active = true;
@@ -41,7 +48,25 @@
         "dhcp-authoritative"
         # Source: https://data.iana.org/root-anchors/root-anchors.xml
         "trust-anchor=.,38696,8,2,683D2D0ACB8C9B712A1948B27F741219298D0A450D612C483AF444A4C0FB2B16"
+        "address=/.pi/100.64.26.26"
       ];
+    };
+  };
+  services.pihole-web = {
+    enable = true;
+    ports = [ "6969" ];
+  };
+
+  networking.firewall = {
+    allowedTCPPorts = [
+      53
+      6969
+    ];
+    allowedUDPPorts = [ 53 ];
+  };
+  services.resolved.settings = {
+    Resolve = {
+      DNSStubListener = "no";
     };
   };
 }
