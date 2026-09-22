@@ -22,4 +22,9 @@
     # The lyrics plugin bundle is named lyrics-plugin.ndp.
     settings.LyricsPriority = ".ttml,.yaml,.yml,.elrc,.srt,lyrics-plugin,embedded,.lrc,.txt";
   };
+  services.caddy.virtualHosts."http://music.pi" = {
+    extraConfig = ''
+      reverse_proxy 127.0.0.1:4533
+    '';
+  };
 }
