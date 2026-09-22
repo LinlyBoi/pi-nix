@@ -8,7 +8,10 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./caddy.nix
       ./pi-packages.nix
+      ./pi-hole.nix
+      ./hledger.nix
       ./tailscale.nix
       ./navidrome.nix
       ./nextcloud.nix
