@@ -1,28 +1,33 @@
-{ config, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
     hledger
   ];
+
   services.hledger-web = {
     enable = true;
-    # Address and port to listen on
-    host = "0.0.0.0";
+    host = "127.0.0.1";
     port = 5000;
-    
-    # Permission level: "view", "add", or "edit"
     allow = "add"; 
+    stateDir = "/var/lib/nextcloud/data/root/files/hledger/"; 
     
-    # Path to your journal files (relative to stateDir or absolute)
+    # Point directly to the exact file path inside Nextcloud storage
     journalFiles = [ "finances.ledger" ];
-    stateDir = "/var/lib/nextcloud/data/root/files/hledger/";
   };
 
-  # networking.firewall = {
-  #   allowedTCPPorts = [
-  #     5000
-  #   ];
-  # };
+  # override service user
+  systemd.services.hledger-web = {
+    serviceConfig = {
+      DynamicUser = lib.mkForce false; 
+
+      User = lib.mkForce "nextcloud";
+      Group = lib.mkForce "nextcloud";
+      ProtectHome = lib.mkForce "no";
+      ReadWritePaths = lib.mkForce [ "/var/lib/nextcloud/data/root/files/hledger/" ];
+    };
+  };
+
   services.caddy.virtualHosts."http://ledger.pi" = {
     extraConfig = ''
       reverse_proxy 127.0.0.1:5000
