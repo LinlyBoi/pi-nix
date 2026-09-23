@@ -24,7 +24,7 @@
       User = lib.mkForce "nextcloud";
       Group = lib.mkForce "nextcloud";
       ProtectHome = lib.mkForce "no";
-      ReadWritePaths = lib.mkForce [ "/var/lib/nextcloud/data/root/files/hledger/" ];
+      ReadWritePaths = lib.mkForce [ "/mnt/hledger" ];
     };
   };
 
