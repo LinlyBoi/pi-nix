@@ -27,4 +27,10 @@
       reverse_proxy 127.0.0.1:4533
     '';
   };
+  services.caddy.virtualHosts."https://music.pi" = {
+    extraConfig = ''
+      tls internal
+      reverse_proxy 127.0.0.1:4533
+    '';
+  };
 }
