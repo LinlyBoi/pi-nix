@@ -10,7 +10,7 @@
     };
   settings = {
     trusted_domains = [ "raspberrypi" "nextcloud.pi" ];
-    overwriteprotocol = "http"; # Use "https" if you set up TLS in Caddy later
+    overwriteprotocol = "https"; # Use "https" if you set up TLS in Caddy later
   };
 };
   # Configure Nextcloud's trusted domains so it accepts proxy requests from Caddy
@@ -28,6 +28,13 @@
 # Route nextcloud.pi from Caddy to NGINX on port 8080
   services.caddy.virtualHosts."http://nextcloud.pi" = {
     extraConfig = ''
+      tls internal
+      reverse_proxy 127.0.0.1:8080
+    '';
+  };
+  services.caddy.virtualHosts."https://nextcloud.pi" = {
+    extraConfig = ''
+      tls internal
       reverse_proxy 127.0.0.1:8080
     '';
   };
