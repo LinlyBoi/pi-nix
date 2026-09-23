@@ -15,7 +15,7 @@
     
     # Path to your journal files (relative to stateDir or absolute)
     journalFiles = [ "finances.ledger" ];
-    stateDir = "/var/lib/hledger-web";
+    stateDir = "/var/lib/nextcloud/data/root/files/hledger/";
   };
 
   # networking.firewall = {
