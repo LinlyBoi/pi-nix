@@ -10,7 +10,7 @@
     host = "127.0.0.1";
     port = 5000;
     allow = "add"; 
-    stateDir = "/var/lib/nextcloud/data/root/files/hledger/"; 
+    stateDir = "/mnt/hledger/"; 
     
     # Point directly to the exact file path inside Nextcloud storage
     journalFiles = [ "finances.ledger" ];
