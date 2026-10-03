@@ -15,6 +15,7 @@
       ./tailscale.nix
       ./navidrome.nix
       ./nextcloud.nix
+      ./bandwidth.nix
     ];
 
   # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
