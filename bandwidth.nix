@@ -11,7 +11,7 @@
       Type = "oneshot";
       RemainAfterExit = true;
       ExecStart = "${pkgs.iproute2}/bin/tc qdisc replace dev end0 root tbf rate 2mbit burst 10kb latency 70ms";
-      ExecStop = "${pkgs.iproute2}/bin/tc qdisc del dev end0 root";
+      ExecStop = "-${pkgs.iproute2}/bin/tc qdisc del dev end0 root";
     };
   };
 }
